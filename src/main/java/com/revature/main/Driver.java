@@ -1,14 +1,10 @@
 package com.revature.main;
 
+import com.revature.controller.AccountController;
 import com.revature.controller.Controller;
 import com.revature.controller.ExceptionController;
-import com.revature.controller.HelloWorldController;
 import com.revature.controller.ClientController;
-import com.revature.utility.ConnectionUtility;
 import io.javalin.Javalin;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class Driver {
 
@@ -16,8 +12,7 @@ public class Driver {
 
         Javalin app = Javalin.create();
 
-
-        mapControllers(app, new HelloWorldController(), new ClientController(), new ExceptionController());
+        mapControllers(app, new ClientController(),new AccountController(), new ExceptionController());
 
         app.start(); // port 8080 by default
     }

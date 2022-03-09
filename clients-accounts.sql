@@ -21,16 +21,26 @@ CREATE TABLE accounts (
 -- DML queries
 INSERT INTO clients (first_name, last_name, age)
 VALUES
-('Joe', 'Harris', 30),
-('Goran', 'Dragic', 35),
-('Lamarcus', 'Aldridge', 36),
-('Ben','Simmons', 25),
-('Patty', 'Mills', 33);
+('Dwight', 'Schrute', 30),
+('Toby', 'Flenderson', 35),
+('Kevin', 'Malone', 36),
+('Angela','Martin', 25),
+('Pam', 'Beesly', 33);
 
 INSERT INTO accounts (account_name, balance, client_id)
 VALUES
-('Checking', 90, 1),
-('Savings', 95, 2),
-('Savings', 85, 3),
-('Brokerage', 97, 4),
-('Checking', 80, 5);
+('Checking', 90567, 1),
+('Savings', 955, 1),
+('Savings', 854, 2),
+('Checking', 9767, 2),
+('Checking', 80, 3),
+('Checking', 9567, 4),
+('Savings', 9556, 3),
+('Savings', 85756, 4),
+('Savings', 97087, 5),
+('Checking', 80567, 5);
+
+select clients.id,first_name,last_name,age,account_name ,balance
+from clients
+join accounts on (clients.id = client_id)
+where clients.id = 2

@@ -2,7 +2,7 @@ package com.revature.model;
 
 import java.util.Objects;
 
-// TODO 7: Create a class that will serve as a model for records in a database table (CLIENTStable)
+//Create our Client
 public class Client {
 
     private int id;
