@@ -15,7 +15,7 @@ public class Driver {
     public static void main(String[] args) {
 
         Javalin app = Javalin.create();
-        
+
 
         mapControllers(app, new HelloWorldController(), new ClientController(), new ExceptionController());
 
