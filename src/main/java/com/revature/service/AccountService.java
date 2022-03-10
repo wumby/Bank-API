@@ -48,7 +48,13 @@ public class AccountService {
         a.setAccount_name(a.getAccount_name().trim());
         a.setBalance(a.getBalance());
 
-        if (!a.getAccount_name().equals("Checking") || !a.getAccount_name().equals("Savings")) {
+        if (a.getAccount_name().equals("checking")) {
+            a.setAccount_name("Checking");
+        }
+        else if (a.getAccount_name().equals("savings")){
+            a.setAccount_name("Savings");
+        }
+        else{
             throw new IllegalArgumentException("Account name must be Checking or Savings. Account name input was " + a.getAccount_name());
         }
 
