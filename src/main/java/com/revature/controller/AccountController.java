@@ -31,11 +31,21 @@ public class AccountController implements Controller{
         ctx.json(account);
     };
 
+    private Handler deleteAccountById = (ctx) -> {
+        String accountId = ctx.pathParam("accountId");
+        String clientId = ctx.pathParam("clientId");
+
+        boolean account = accountService.deleteAccountById(accountId, clientId);
+
+        ctx.json(account);
+    };
+
 
     @Override
     public void mapEndpoints(Javalin app) {
         app.get("/clients/{clientId}/accounts", getAccountsById);
         app.post("/clients/{clientId}/accounts", addAccount);
+        app.delete("/clients/{clientId}/accounts/{accountId}", deleteAccountById);
 
     }
 }

@@ -39,7 +39,7 @@ public class ClientService {
 
             return editedStudent;
         } catch(NumberFormatException | ClientNotFoundException | SQLException e) {
-            throw new IllegalArgumentException("Id provided for student must be a valid int");
+            throw new IllegalArgumentException("Id provided for client must be a valid int");
         }
     }
 

@@ -44,6 +44,27 @@ public class AccountService {
 
     }
 
+
+    public boolean deleteAccountById(String account_id, String client_id) throws SQLException, ClientNotFoundException {
+
+        try {
+
+            int accountId = Integer.parseInt(account_id);
+            int clientId = Integer.parseInt(client_id);// This could throw an unchecked exception
+            // known as NumberFormatException
+            // Important to take note of this, because any unhandled exceptions will result
+            // in a 500 Internal Server Error (which we should try to avoid)
+
+            boolean a = accountDao.deleteAccountById(accountId, clientId); // this could return null
+
+            return a;
+
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Id provided for client and account must both be a valid int");
+        }
+    }
+
+
     public void validateAccountInformation(Account a) {
         a.setAccount_name(a.getAccount_name().trim());
         a.setBalance(a.getBalance());

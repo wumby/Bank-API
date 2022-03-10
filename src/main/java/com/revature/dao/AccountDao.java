@@ -65,5 +65,22 @@ public class AccountDao {
         return accounts;
     }
 
+    public boolean deleteAccountById(int client_id, int account_id) throws SQLException{
+        try (Connection con = ConnectionUtility.getConnection()) {
+        String sql = "DELETE FROM accounts WHERE (id = ? AND client_id = ?)";
 
+        PreparedStatement pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, account_id);
+        pstmt.setInt(2, client_id);
+
+        int numberOfRecordsDeleted = pstmt.executeUpdate(); // executeUpdate() is used with INSERT, UPDATE, DELETE
+
+        if (numberOfRecordsDeleted == 1) {
+            return true;
+        }
+    }
+
+        return false;
+}
 }
