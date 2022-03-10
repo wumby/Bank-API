@@ -32,14 +32,13 @@ VALUES
 ('Checking', 90567, 1),
 ('Savings', 955, 1),
 ('Savings', 854, 2),
-('Checking', 9767, 2),
+('Brokerage', 9767, 2),
 ('Checking', 80, 3),
-('Checking', 9567, 4),
-('Savings', 9556, 3),
+('Savings', 9567, 3),
+('Checking', 9556, 4),
 ('Savings', 85756, 4),
-('Savings', 97087, 5),
+('Brokerage', 97087, 5),
 ('Checking', 80567, 5);
-
 select clients.id,first_name,last_name,age,account_name ,balance
 from clients
 join accounts on (clients.id = client_id)

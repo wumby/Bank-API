@@ -17,18 +17,25 @@ public class AccountController implements Controller{
         this.accountService = new AccountService();
     }
 
-    private Handler getAccountById = (ctx) -> {
-        List<Account> accounts = accountService.getAllAccountsById();
+    private Handler getAccountsById = (ctx) -> {
+        String id = ctx.pathParam("clientId");
+        List<Account> accounts = accountService.getAccountsById(id);
+
 
         ctx.json(accounts);
+    };
 
-        ctx.json(accounts);
+    private Handler addAccount = (ctx) -> {
+        Account accountToAdd = ctx.bodyAsClass(Account.class);
+        Account account = accountService.addAccount(accountToAdd);
+        ctx.json(account);
     };
 
 
     @Override
     public void mapEndpoints(Javalin app) {
-        app.get("/clients/{clientId}/accounts", getAccountById);
+        app.get("/clients/{clientId}/accounts", getAccountsById);
+        app.post("/clients/{clientId}/accounts", addAccount);
 
     }
 }
