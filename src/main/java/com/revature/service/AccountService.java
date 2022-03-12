@@ -18,12 +18,35 @@ public class AccountService {
         this.accountDao = mockDao;
     }
 
-    public Account addAccount(Account a) throws SQLException{
+    public Account addAccount(String client_id, Account a) throws SQLException{
+        int clientId = Integer.parseInt(client_id);
+        a.setClient_id(clientId);
         validateAccountInformation(a);
+
 
         Account accountToAdd = accountDao.addAccount(a);
 
         return accountToAdd;
+    }
+
+
+    public Account editAccount(String id, String client_id, Account a) {
+        try {
+            int accountId = Integer.parseInt(id);
+            int clientId = Integer.parseInt(client_id);
+            if (accountDao.getAccountsById(clientId) == null) {
+                throw new ClientNotFoundException("User is trying to edit an account that is not linked to a client ");
+            }
+
+            validateAccountInformation(a);
+
+            a.setId(accountId);
+            Account editedAccount = accountDao.updateAccount(a);
+
+            return editedAccount;
+        } catch(NumberFormatException | ClientNotFoundException | SQLException e) {
+            throw new IllegalArgumentException("Id provided for client must be a valid int");
+        }
     }
 
 
@@ -45,6 +68,23 @@ public class AccountService {
     }
 
 
+    public Account getAccountByIds(String account_id, String client_id) throws SQLException, ClientNotFoundException {
+        try{
+            int clientId = Integer.parseInt(client_id);
+            int accountId = Integer.parseInt(account_id);
+
+            Account a = accountDao.getAccountByIds(accountId, clientId);
+        if (a == null) {
+            throw new ClientNotFoundException("Client with id " + clientId + " was not found associated with that account number");
+        }
+
+        return a;
+        } catch (NumberFormatException e) {
+             throw new IllegalArgumentException("Id provided for client must be a valid int");
+        }
+    }
+
+    
     public boolean deleteAccountById(String account_id, String client_id) throws SQLException, ClientNotFoundException {
 
         try {
@@ -65,7 +105,7 @@ public class AccountService {
     }
 
 
-    public void validateAccountInformation(Account a) {
+    private void validateAccountInformation(Account a) {
         a.setAccount_name(a.getAccount_name().trim());
         a.setBalance(a.getBalance());
 

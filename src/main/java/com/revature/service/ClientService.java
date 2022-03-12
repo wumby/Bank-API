@@ -91,7 +91,7 @@ public class ClientService {
         }
     }
 
-        public void validateClientInformation(Client c) {
+        private void validateClientInformation(Client c) {
             c.setFirstName(c.getFirstName().trim());
             c.setLastName(c.getLastName().trim());
 
