@@ -31,6 +31,7 @@ public class ClientDao {
             ResultSet rs = pstmt.getGeneratedKeys();
             rs.next();
             int generatedId = rs.getInt(1); // 1st column of the ResultSet
+            System.out.println(generatedId);
 
             return new Client(generatedId, client.getFirstName(), client.getLastName(), client.getAge());
         }

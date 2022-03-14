@@ -10,6 +10,11 @@ public class Account {
     private double balance;
     private int client_id;
 
+
+    public Account() {
+    }
+
+
     public Account(int id, String account_name, double balance, int client_id) {
         this.id = id;
         this.account_name = account_name;

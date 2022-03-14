@@ -1,5 +1,5 @@
 package com.revature.service;
-
+import com.revature.dao.ClientDao;
 import com.revature.dao.AccountDao;
 import com.revature.exception.ClientNotFoundException;
 import com.revature.model.Account;
@@ -18,9 +18,7 @@ public class AccountService {
         this.accountDao = mockDao;
     }
 
-    public Account addAccount(String client_id, Account a) throws SQLException{
-        int clientId = Integer.parseInt(client_id);
-        a.setClient_id(clientId);
+    public Account addAccount(Account a) throws SQLException{
         validateAccountInformation(a);
 
 
@@ -30,24 +28,22 @@ public class AccountService {
     }
 
 
-    public Account editAccount(String id, String client_id, Account a) {
-        try {
+    public Account editAccount(String id, String client_id, Account a) throws SQLException {
+
             int accountId = Integer.parseInt(id);
             int clientId = Integer.parseInt(client_id);
-            if (accountDao.getAccountsById(clientId) == null) {
-                throw new ClientNotFoundException("User is trying to edit an account that is not linked to a client ");
-            }
 
+
+            a.setClient_id(clientId);
+            a.setId(accountId);
             validateAccountInformation(a);
 
-            a.setId(accountId);
             Account editedAccount = accountDao.updateAccount(a);
 
             return editedAccount;
-        } catch(NumberFormatException | ClientNotFoundException | SQLException e) {
-            throw new IllegalArgumentException("Id provided for client must be a valid int");
-        }
+
     }
+
 
 
     public List<Account> getAccountsById(String id) throws SQLException, ClientNotFoundException {
@@ -56,7 +52,7 @@ public class AccountService {
 
             //Check if client exists
             if (this.accountDao.getAccountsById(clientId).isEmpty()) {
-                throw new ClientNotFoundException("Client with id " + clientId + " was not found");
+                throw new ClientNotFoundException("Client with id " + clientId + " was not found associated with this account");
             }
 
             return this.accountDao.getAccountsById(clientId);
@@ -68,12 +64,12 @@ public class AccountService {
     }
 
 
-    public Account getAccountByIds(String account_id, String client_id) throws SQLException, ClientNotFoundException {
+    public Account getAccountByIds(String client_id, String account_id) throws SQLException, ClientNotFoundException {
         try{
             int clientId = Integer.parseInt(client_id);
             int accountId = Integer.parseInt(account_id);
 
-            Account a = accountDao.getAccountByIds(accountId, clientId);
+            Account a = accountDao.getAccountByIds(clientId, accountId);
         if (a == null) {
             throw new ClientNotFoundException("Client with id " + clientId + " was not found associated with that account number");
         }
@@ -85,7 +81,7 @@ public class AccountService {
     }
 
     
-    public boolean deleteAccountById(String account_id, String client_id) throws SQLException, ClientNotFoundException {
+    public boolean deleteAccountById(String client_id, String account_id) throws SQLException, ClientNotFoundException {
 
         try {
 
@@ -95,7 +91,7 @@ public class AccountService {
             // Important to take note of this, because any unhandled exceptions will result
             // in a 500 Internal Server Error (which we should try to avoid)
 
-            boolean a = accountDao.deleteAccountById(accountId, clientId); // this could return null
+            boolean a = accountDao.deleteAccountById(clientId, accountId); // this could return null
 
             return a;
 
@@ -108,14 +104,14 @@ public class AccountService {
     private void validateAccountInformation(Account a) {
         a.setAccount_name(a.getAccount_name().trim());
         a.setBalance(a.getBalance());
-
+        a.setClient_id(a.getClient_id());
         if (a.getAccount_name().equals("checking")) {
             a.setAccount_name("Checking");
         }
-        else if (a.getAccount_name().equals("savings")){
+        if (a.getAccount_name().equals("savings")){
             a.setAccount_name("Savings");
         }
-        else{
+        if(!a.getAccount_name().equals("Savings") & !a.getAccount_name().equals("Checking") ){
             throw new IllegalArgumentException("Account name must be Checking or Savings. Account name input was " + a.getAccount_name());
         }
 

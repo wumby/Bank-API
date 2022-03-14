@@ -19,6 +19,8 @@ public class AccountController implements Controller{
 
     private Handler getAccountsById = (ctx) -> {
         String id = ctx.pathParam("clientId");
+        String maxValue = ctx.queryParam("amountLessThan");
+        String minValue = ctx.queryParam("amountGreaterThan");
         List<Account> accounts = accountService.getAccountsById(id);
 
 
@@ -28,7 +30,7 @@ public class AccountController implements Controller{
     private Handler addAccount = (ctx) -> {
         Account accountToAdd = ctx.bodyAsClass(Account.class);
         String clientId = ctx.pathParam("clientId");
-        Account account = accountService.addAccount(clientId, accountToAdd);
+        Account account = accountService.addAccount(accountToAdd);
         ctx.json(account);
     };
 
@@ -36,7 +38,7 @@ public class AccountController implements Controller{
         String accountId = ctx.pathParam("accountId");
         String clientId = ctx.pathParam("clientId");
 
-        boolean account = accountService.deleteAccountById(accountId, clientId);
+        boolean account = accountService.deleteAccountById(clientId, accountId);
 
         ctx.json(account);
     };
@@ -45,18 +47,21 @@ public class AccountController implements Controller{
     private Handler getAccountByIds = (ctx) -> {
         String clientId = ctx.pathParam("clientId");
         String accountId = ctx.pathParam("accountId");
-        Account account = accountService.getAccountByIds(accountId, clientId);
+        Account account = accountService.getAccountByIds(clientId, accountId);
 
         ctx.json(account);
 
 
     };
+
+
     private Handler editAccount = (ctx) -> {
         Account accountToEdit = ctx.bodyAsClass(Account.class);
-
-        //Account editedAccount = accountService.editAccount((ctx.pathParam("clientId"),accountToEdit);
-        //ctx.status(200);
-        //ctx.json(editedAccount);
+        String clientId = ctx.pathParam("clientId");
+        String accountId = ctx.pathParam("accountId");
+        Account editedAccount = accountService.editAccount(clientId,accountId,accountToEdit);
+        ctx.status(200);
+        ctx.json(editedAccount);
     };
 
 

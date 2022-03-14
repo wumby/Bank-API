@@ -25,19 +25,19 @@ public class ClientService {
 
     public Client editClient(String id, Client c) {
         try {
-            int studentId = Integer.parseInt(id);
+            int clientId = Integer.parseInt(id);
 
-            if (clientdao.getClientById(studentId) == null) {
-                throw new ClientNotFoundException("User is trying to edit a Student that does not exist. Student with id " + studentId
+            if (clientdao.getClientById(clientId) == null) {
+                throw new ClientNotFoundException("User is trying to edit a Student that does not exist. Student with id " + clientId
                         + " was not found");
             }
 
             validateClientInformation(c);
 
-            c.setId(studentId);
-            Client editedStudent = clientdao.updateClient(c);
+            c.setId(clientId);
+            Client editedClient = clientdao.updateClient(c);
 
-            return editedStudent;
+            return editedClient;
         } catch(NumberFormatException | ClientNotFoundException | SQLException e) {
             throw new IllegalArgumentException("Id provided for client must be a valid int");
         }
