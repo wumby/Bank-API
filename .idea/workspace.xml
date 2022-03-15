@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6015f904-ee32-4fd6-8d51-17dbd791cb65" name="Changes" comment="added get account by id's functionality">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mylogfile.log" beforeDir="false" afterPath="$PROJECT_DIR$/mylogfile.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/controller/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/dao/AccountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/dao/AccountDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/service/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/service/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/service/ClientService.java" afterDir="false" />
-    </list>
+    <list default="true" id="6015f904-ee32-4fd6-8d51-17dbd791cb65" name="Changes" comment="finished all endpoints" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647284151796</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="finished all endpoints">
+      <created>1647318070606</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1647318070606</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,6 +166,7 @@
     <MESSAGE value="initial" />
     <MESSAGE value="added delete account functionality" />
     <MESSAGE value="added get account by id's functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="added get account by id's functionality" />
+    <MESSAGE value="finished all endpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished all endpoints" />
   </component>
 </project>
