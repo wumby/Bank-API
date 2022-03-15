@@ -39,22 +39,15 @@ public class ClientDao {
 
     // R
     public Client getClientById(int id) throws SQLException {
-        // TODO 9: Call the getConnection method from ConnectionUtility (which we made)
         try (Connection con = ConnectionUtility.getConnection()) { // try-with-resources
-            // TODO 10: Create a (Prepared)Statement object using the Connection object
             String sql = "SELECT * FROM clients WHERE id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            // TODO 11: If any parameters need to be set, set the parameters (?)
             pstmt.setInt(1, id);
 
-            // TODO 12: Execute the query and retrieve a ResultSet object
             ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
 
-            // TODO 13: Iterate over record(s) using the ResultSet's next() method
             if (rs.next()) {
-                // TODO 14: Grab the information from the record
-//                int clientId = rs.getInt("id");
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
                 int age = rs.getInt("age");
@@ -74,7 +67,7 @@ public class ClientDao {
             String sql = "SELECT * FROM clients";
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");

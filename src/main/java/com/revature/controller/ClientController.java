@@ -15,13 +15,13 @@ public class ClientController implements Controller {
         this.clientService = new ClientService();
     }
 
-    // This lambda will implicitly have "throws Exception" based on the functional interface
-    // This is something to be aware of, because you might actually want to handle some exceptions
+
     private Handler getAllClients = (ctx) -> {
         List<Client> clients = clientService.getAllClients();
 
         ctx.json(clients);
     };
+
 
     private Handler getClientById = (ctx) -> {
         String id = ctx.pathParam("clientId");
@@ -31,6 +31,7 @@ public class ClientController implements Controller {
         ctx.json(client);
     };
 
+
     private Handler deleteClientByID = (ctx) -> {
         String id = ctx.pathParam("clientId");
 
@@ -39,11 +40,13 @@ public class ClientController implements Controller {
         ctx.json(client);
     };
 
+
     private Handler addClient = (ctx) -> {
         Client clientToAdd = ctx.bodyAsClass(Client.class);
         Client client = clientService.addClient(clientToAdd);
         ctx.json(client);
     };
+
 
     private Handler editClient = (ctx) -> {
 

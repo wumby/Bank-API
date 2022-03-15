@@ -56,10 +56,7 @@ public class ClientService {
 
         try {
 
-            int clientId = Integer.parseInt(id); // This could throw an unchecked exception
-            // known as NumberFormatException
-            // Important to take note of this, because any unhandled exceptions will result
-            // in a 500 Internal Server Error (which we should try to avoid)
+            int clientId = Integer.parseInt(id);
 
             boolean c = clientdao.deleteClientById(clientId); // this could return null
 
@@ -73,10 +70,7 @@ public class ClientService {
 
     public Client getClientById(String id) throws SQLException, ClientNotFoundException {
         try {
-            int clientId = Integer.parseInt(id); // This could throw an unchecked exception
-            // known as NumberFormatException
-            // Important to take note of this, because any unhandled exceptions will result
-            // in a 500 Internal Server Error (which we should try to avoid)
+            int clientId = Integer.parseInt(id);
 
             Client c = clientdao.getClientById(clientId); // this could return null
 

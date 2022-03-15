@@ -47,14 +47,10 @@ public class AccountDao {
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1,clientId);
             pstmt.setInt(2,max_value);
-            // TODO 11: If any parameters need to be set, set the parameters (?)
 
-            // TODO 12: Execute the query and retrieve a ResultSet object
             ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
 
-            // TODO 13: Iterate over record(s) using the ResultSet's next() method
             while (rs.next()) {
-                // TODO 14: Grab the information from the record
                 int id = rs.getInt("id");
                 String account_name = rs.getString("account_name");
                 double balance = rs.getDouble("balance");
@@ -72,20 +68,16 @@ public class AccountDao {
     public List<Account> getAccountsGreaterThanById(int min_value, int clientId) throws SQLException {
         List<Account> accounts = new ArrayList<>();
         //Call connection method
-        try (Connection con = ConnectionUtility.getConnection()) { // try-with-resources
+        try (Connection con = ConnectionUtility.getConnection()) {
             //Prepare our prepared SQL statement using the connection method
             String sql = "SELECT *" +" FROM accounts" + " Where client_id = ? AND balance > ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1,clientId);
             pstmt.setDouble(2,min_value);
-            // TODO 11: If any parameters need to be set, set the parameters (?)
 
-            // TODO 12: Execute the query and retrieve a ResultSet object
             ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
 
-            // TODO 13: Iterate over record(s) using the ResultSet's next() method
             while (rs.next()) {
-                // TODO 14: Grab the information from the record
                 int id = rs.getInt("id");
                 String account_name = rs.getString("account_name");
                 double balance = rs.getDouble("balance");
@@ -110,14 +102,10 @@ public class AccountDao {
             pstmt.setInt(1,clientId);
             pstmt.setInt(2,min_value);
             pstmt.setInt(3,max_value);
-            // TODO 11: If any parameters need to be set, set the parameters (?)
 
-            // TODO 12: Execute the query and retrieve a ResultSet object
             ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
 
-            // TODO 13: Iterate over record(s) using the ResultSet's next() method
             while (rs.next()) {
-                // TODO 14: Grab the information from the record
                 int id = rs.getInt("id");
                 String account_name = rs.getString("account_name");
                 double balance = rs.getDouble("balance");
@@ -141,14 +129,10 @@ public class AccountDao {
             String sql = "SELECT *" +" FROM accounts" + " Where client_id = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1,clientId);
-            // TODO 11: If any parameters need to be set, set the parameters (?)
 
-            // TODO 12: Execute the query and retrieve a ResultSet object
             ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
 
-            // TODO 13: Iterate over record(s) using the ResultSet's next() method
             while (rs.next()) {
-                // TODO 14: Grab the information from the record
                 int id = rs.getInt("id");
                 String account_name = rs.getString("account_name");
                 double balance = rs.getDouble("balance");
@@ -164,21 +148,16 @@ public class AccountDao {
 
 
     public Account getAccountByIds(int client_id, int account_id){
-        try (Connection con = ConnectionUtility.getConnection()) { // try-with-resources
-            // TODO 10: Create a (Prepared)Statement object using the Connection object
+        try (Connection con = ConnectionUtility.getConnection()) {
             String sql = "SELECT * FROM accounts WHERE (id = ? AND client_id = ?)";
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            // TODO 11: If any parameters need to be set, set the parameters (?)
             pstmt.setInt(1, account_id);
             pstmt.setInt(2, client_id);
 
-            // TODO 12: Execute the query and retrieve a ResultSet object
-            ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
+            ResultSet rs = pstmt.executeQuery();
 
-            // TODO 13: Iterate over record(s) using the ResultSet's next() method
             if (rs.next()) {
-                // TODO 14: Grab the information from the record
                 String account_name = rs.getString("account_name");
                 double balance = rs.getDouble("balance");
                 int clientId = rs.getInt("client_id");
@@ -191,36 +170,6 @@ public class AccountDao {
         }
 
         return null;
-    }
-
-
-    public List<Account> getAccountsLength() throws SQLException {
-        List<Account> accounts = new ArrayList<>();
-        //Call connection method
-        try (Connection con = ConnectionUtility.getConnection()) { // try-with-resources
-            //Prepare our prepared SQL statement using the connection method
-            String sql = "SELECT *" +" FROM accounts";
-            PreparedStatement pstmt = con.prepareStatement(sql);
-            // TODO 11: If any parameters need to be set, set the parameters (?)
-
-            // TODO 12: Execute the query and retrieve a ResultSet object
-            ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
-
-            // TODO 13: Iterate over record(s) using the ResultSet's next() method
-            while (rs.next()) {
-                // TODO 14: Grab the information from the record
-                int id = rs.getInt("id");
-                String account_name = rs.getString("account_name");
-                double balance = rs.getDouble("balance");
-                int client_id = rs.getInt("client_id");
-
-                accounts.add(new Account(id, account_name, balance, client_id));
-            }
-            System.out.println("size" + accounts.size());
-
-        }
-
-        return accounts;
     }
 
     

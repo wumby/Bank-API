@@ -15,10 +15,12 @@ public class ExceptionController implements Controller {
         ctx.json(e.getMessage());
     };
 
+
     private ExceptionHandler badArgument = (e, ctx) -> {
         ctx.status(400);
         ctx.json(e.getMessage());
     };
+
 
     @Override
     public void mapEndpoints(Javalin app) {
