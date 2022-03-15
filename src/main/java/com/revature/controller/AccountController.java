@@ -21,10 +21,30 @@ public class AccountController implements Controller{
         String id = ctx.pathParam("clientId");
         String maxValue = ctx.queryParam("amountLessThan");
         String minValue = ctx.queryParam("amountGreaterThan");
-        List<Account> accounts = accountService.getAccountsById(id);
+        if(maxValue != null & minValue != null){
+            List<Account> accounts = accountService.getAccountsBetweenById(minValue, maxValue,id);
+            System.out.println("between");
+            ctx.json(accounts);
+        }
+        else if (maxValue != null) {
+            List<Account> accounts = accountService.getAccountsLessThanById(maxValue,id);
+            System.out.println("less than");
+            ctx.json(accounts);
+        }
+        else if (minValue != null) {
+            List<Account> accounts = accountService.getAccountsGreaterThanById(minValue,id);
+            System.out.println("ggreater than");
+            ctx.json(accounts);
+        }
+        else{
+            List<Account> accounts = accountService.getAccountsById(id);
+            System.out.println("default");
+            ctx.json(accounts);
+        }
 
 
-        ctx.json(accounts);
+
+
     };
 
     private Handler addAccount = (ctx) -> {

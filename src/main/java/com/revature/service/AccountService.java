@@ -44,7 +44,60 @@ public class AccountService {
 
     }
 
+    public List<Account> getAccountsLessThanById(String max_value, String id) throws SQLException, ClientNotFoundException {
+        try{
+            int clientId = Integer.parseInt(id);
+            int maxValue = Integer.parseInt(max_value);
 
+            //Check if client exists
+            if (this.accountDao.getAccountsById(clientId).isEmpty()) {
+                throw new ClientNotFoundException("Client with id " + clientId + " was not found associated with this account");
+            }
+
+            return this.accountDao.getAccountsLessThanById(maxValue,clientId);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException("Id provided for client must be a valid int");
+        }
+
+
+    }
+
+
+    public List<Account> getAccountsGreaterThanById(String min_value, String id) throws SQLException, ClientNotFoundException {
+        try{
+            int clientId = Integer.parseInt(id);
+            int minValue = Integer.parseInt(min_value);
+            //Check if client exists
+            if (this.accountDao.getAccountsById(clientId).isEmpty()) {
+                throw new ClientNotFoundException("Client with id " + clientId + " was not found associated with this account");
+            }
+
+            return this.accountDao.getAccountsGreaterThanById(minValue,clientId);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException("Id provided for client must be a valid int");
+        }
+
+
+    }
+
+
+    public List<Account> getAccountsBetweenById(String min_value, String max_value, String id) throws SQLException, ClientNotFoundException {
+        try{
+            int clientId = Integer.parseInt(id);
+            int minValue = Integer.parseInt(min_value);
+            int maxValue = Integer.parseInt(max_value);
+            //Check if client exists
+            if (this.accountDao.getAccountsById(clientId).isEmpty()) {
+                throw new ClientNotFoundException("Client with id " + clientId + " was not found associated with this account");
+            }
+
+            return this.accountDao.getAccountsBetweenById(minValue, maxValue, clientId);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException("Id provided for client must be a valid int");
+        }
+
+
+    }
 
     public List<Account> getAccountsById(String id) throws SQLException, ClientNotFoundException {
         try{

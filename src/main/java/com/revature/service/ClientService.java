@@ -23,12 +23,12 @@ public class ClientService {
         return this.clientdao.getAllClients();
     }
 
-    public Client editClient(String id, Client c) {
+    public Client editClient(String id, Client c) throws ClientNotFoundException {
         try {
             int clientId = Integer.parseInt(id);
 
             if (clientdao.getClientById(clientId) == null) {
-                throw new ClientNotFoundException("User is trying to edit a Student that does not exist. Student with id " + clientId
+                throw new ClientNotFoundException("The client with id " + clientId
                         + " was not found");
             }
 
@@ -38,7 +38,7 @@ public class ClientService {
             Client editedClient = clientdao.updateClient(c);
 
             return editedClient;
-        } catch(NumberFormatException | ClientNotFoundException | SQLException e) {
+        } catch(NumberFormatException |  SQLException e) {
             throw new IllegalArgumentException("Id provided for client must be a valid int");
         }
     }

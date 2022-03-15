@@ -37,6 +37,101 @@ public class AccountDao {
 
     }
 
+
+    public List<Account> getAccountsLessThanById(int max_value, int clientId) throws SQLException {
+        List<Account> accounts = new ArrayList<>();
+        //Call connection method
+        try (Connection con = ConnectionUtility.getConnection()) { // try-with-resources
+            //Prepare our prepared SQL statement using the connection method
+            String sql = "SELECT *" +" FROM accounts" + " Where client_id = ? AND balance < ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1,clientId);
+            pstmt.setInt(2,max_value);
+            // TODO 11: If any parameters need to be set, set the parameters (?)
+
+            // TODO 12: Execute the query and retrieve a ResultSet object
+            ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
+
+            // TODO 13: Iterate over record(s) using the ResultSet's next() method
+            while (rs.next()) {
+                // TODO 14: Grab the information from the record
+                int id = rs.getInt("id");
+                String account_name = rs.getString("account_name");
+                double balance = rs.getDouble("balance");
+                int client_id = rs.getInt("client_id");
+
+                accounts.add(new Account(id, account_name, balance, client_id));
+            }
+
+        }
+
+        return accounts;
+    }
+
+
+    public List<Account> getAccountsGreaterThanById(int min_value, int clientId) throws SQLException {
+        List<Account> accounts = new ArrayList<>();
+        //Call connection method
+        try (Connection con = ConnectionUtility.getConnection()) { // try-with-resources
+            //Prepare our prepared SQL statement using the connection method
+            String sql = "SELECT *" +" FROM accounts" + " Where client_id = ? AND balance > ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1,clientId);
+            pstmt.setDouble(2,min_value);
+            // TODO 11: If any parameters need to be set, set the parameters (?)
+
+            // TODO 12: Execute the query and retrieve a ResultSet object
+            ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
+
+            // TODO 13: Iterate over record(s) using the ResultSet's next() method
+            while (rs.next()) {
+                // TODO 14: Grab the information from the record
+                int id = rs.getInt("id");
+                String account_name = rs.getString("account_name");
+                double balance = rs.getDouble("balance");
+                int client_id = rs.getInt("client_id");
+
+                accounts.add(new Account(id, account_name, balance, client_id));
+            }
+
+        }
+
+        return accounts;
+    }
+
+
+    public List<Account> getAccountsBetweenById(int min_value, int max_value, int clientId) throws SQLException {
+        List<Account> accounts = new ArrayList<>();
+        //Call connection method
+        try (Connection con = ConnectionUtility.getConnection()) { // try-with-resources
+            //Prepare our prepared SQL statement using the connection method
+            String sql = "SELECT *" +" FROM accounts" + " Where client_id = ? AND balance BETWEEN ? AND ? ";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1,clientId);
+            pstmt.setInt(2,min_value);
+            pstmt.setInt(3,max_value);
+            // TODO 11: If any parameters need to be set, set the parameters (?)
+
+            // TODO 12: Execute the query and retrieve a ResultSet object
+            ResultSet rs = pstmt.executeQuery(); // executeQuery() is used with SELECT
+
+            // TODO 13: Iterate over record(s) using the ResultSet's next() method
+            while (rs.next()) {
+                // TODO 14: Grab the information from the record
+                int id = rs.getInt("id");
+                String account_name = rs.getString("account_name");
+                double balance = rs.getDouble("balance");
+                int client_id = rs.getInt("client_id");
+
+                accounts.add(new Account(id, account_name, balance, client_id));
+            }
+
+        }
+
+        return accounts;
+    }
+
+
     //Get all accounts for client with id of X (if client exists)
     public List<Account> getAccountsById(int clientId) throws SQLException {
         List<Account> accounts = new ArrayList<>();
@@ -66,6 +161,7 @@ public class AccountDao {
 
         return accounts;
     }
+
 
     public Account getAccountByIds(int client_id, int account_id){
         try (Connection con = ConnectionUtility.getConnection()) { // try-with-resources
@@ -97,6 +193,7 @@ public class AccountDao {
         return null;
     }
 
+
     public List<Account> getAccountsLength() throws SQLException {
         List<Account> accounts = new ArrayList<>();
         //Call connection method
@@ -126,6 +223,7 @@ public class AccountDao {
         return accounts;
     }
 
+    
     public Account updateAccount(Account account) throws SQLException {
         try (Connection con = ConnectionUtility.getConnection()) {
             String sql = "UPDATE accounts " +
