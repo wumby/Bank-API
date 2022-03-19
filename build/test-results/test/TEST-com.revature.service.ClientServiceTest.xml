@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.revature.service.ClientServiceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-03-16T14:36:49" hostname="DESKTOP-698R2IH" time="0.565">
+  <properties/>
+  <testcase name="test_getClientById_invalidId()" classname="com.revature.service.ClientServiceTest" time="0.535"/>
+  <testcase name="testGetClientById_positiveTest()" classname="com.revature.service.ClientServiceTest" time="0.019"/>
+  <testcase name="testDeleteClientById()" classname="com.revature.service.ClientServiceTest" time="0.001"/>
+  <testcase name="test_getStudentById_studentDoesNotExist()" classname="com.revature.service.ClientServiceTest" time="0.002"/>
+  <testcase name="testGetAllClients()" classname="com.revature.service.ClientServiceTest" time="0.001"/>
+  <testcase name="test_getClientById_sqlExceptionFromDao()" classname="com.revature.service.ClientServiceTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
